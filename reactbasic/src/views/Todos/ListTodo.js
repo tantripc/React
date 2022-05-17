@@ -31,11 +31,18 @@ class ListTodo extends React.Component {
             return;
         }
 
-        this.state.todoList[todo].title = this.state.editTodo.title;
-        this.setState({ todoList: this.state.todoList, editTodo: {} });
+        let { todoList, editTodo } = { ...this.state };
+
+        let index = todoList.findIndex(td => td.id == todo.id);
+        todoList[index].title = editTodo.title;
+        this.setState({ todoList: todoList, editTodo: {} });
         toast.success("Updated!");
     }
-
+    handleOnchangeEditTodo = (event) => {
+        let editTodo = { ...this.state.editTodo };
+        editTodo.title = event.target.value;
+        this.setState({ editTodo: editTodo });
+    }
     render() {
         let { todoList, editTodo } = this.state;
         let isEmptyObj = Object.keys(editTodo).length === 0;
