@@ -1,43 +1,44 @@
 import React from "react";
-import ChildForm from "./ChildForm";
 
 class Form extends React.Component {
 
     state = {
-        firstName: "",
-        lastName: "",
-        arrJobs: [
-            { id: "job1", title: "Developer", salary: "500$" },
-            { id: "job2", title: "Project manager", salary: "1000$" },
-            { id: "job3", title: "Testers", salary: "400$" }
-        ]
+        title: "",
+        salary: ""
     }
 
-    handleChangeFirstName = (e) => {
-        this.setState({ firstName: e.target.value });
+    handleChangetitle = (e) => {
+        this.setState({ title: e.target.value });
     }
-    handleChangeLastName = (e) => {
-        this.setState({ lastName: e.target.value });
+    handleChangesalary = (e) => {
+        this.setState({ salary: e.target.value });
     }
     handleSubmit = (event) => {
         event.preventDefault();
         console.log(this.state);
+        // Check required
+        if (!this.state.title || !this.state.salary) {
+            alert("Missing required params!");
+            return;
+        }
+        this.props.addNewJob({ id: Math.floor(Math.random() * 1111), title: this.state.title, salary: this.state.salary });
+
+        // Reset input
+        this.setState({ title: '', salary: '' });
     }
 
     render() {
         return (
-            <div>
-                Form
+            <>
                 <form>
-                    <label>First Name</label><br />
-                    <input id="firstName" type="text" value={this.state.firstName} onChange={(e) => this.handleChangeFirstName(e)} /><br /><br />
-                    <label>Last Name</label><br />
-                    <input id="lastName" type="text" value={this.state.lastName} onChange={(e) => this.handleChangeLastName(e)} /><br />
+                    <label>Title job</label><br />
+                    <input id="title" type="text" value={this.state.title} onChange={(e) => this.handleChangetitle(e)} /><br /><br />
+                    <label>Salary</label><br />
+                    <input id="salary" type="text" value={this.state.salary} onChange={(e) => this.handleChangesalary(e)} /><br />
                     <input type="submit" onClick={(event) => this.handleSubmit(event)} value="Submit" />
                 </form>
-                ChildForm
-                <ChildForm name={"Child 1"} age={'30'} arrJobs={this.state.arrJobs} />
-            </div>)
+            </>
+        );
     }
 }
 

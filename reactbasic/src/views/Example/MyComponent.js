@@ -1,33 +1,32 @@
 import React from "react";
+import ChildForm from "../Form/ChildForm";
+import Form from "../Form/Form";
 
 class MyComponent extends React.Component {
-    // khai bao state
     state = {
-        name: "TantripcState",
-        age: 30
-    }
-    handleOnchangeName = (event) => {
-        this.setState({ name: event.target.value });
-    }
-    HandleClick = (event) => {
-        this.setState({ age: this.state.age + 1 });
-        //alert(this.state.age);
+        arrJobs: [
+            { id: "job1", title: "Developer", salary: "500" },
+            { id: "job2", title: "Project manager", salary: "1000" },
+            { id: "job3", title: "Testers", salary: "400" }
+        ]
     }
 
+    addNewJob = (job) => {
+        let currentJobs = this.state.arrJobs;
+        currentJobs.push(job);
+        this.setState({ arrJobs: currentJobs });
+    }
+    deleteJob = (job) => {
+        this.state.arrJobs.pop(job);
+        this.setState({ arrJobs: this.state.arrJobs });
+    }
 
     render() {
         // declare variable    
         return (
             <>
-                <input value={this.state.name} type="text" onChange={(event) => this.handleOnchangeName(event)} />
-                <div>My Component js - {this.state.name}</div>
-                <div>
-                    Name: {this.state.name} <br />
-                    Age: {this.state.age}
-                </div>
-                <div className="btn-container">
-                    <button type="button" onClick={(event) => this.HandleClick(event)}>Click di!</button>
-                </div>
+                <Form addNewJob={this.addNewJob} />
+                <ChildForm arrJobs={this.state.arrJobs} deleteJob={this.deleteJob} />
             </>
         )
     }
