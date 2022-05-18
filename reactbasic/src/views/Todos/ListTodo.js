@@ -18,7 +18,7 @@ class ListTodo extends React.Component {
         toast.success(todo.title + " is added success!")
     }
     deleteTodo = (todo) => {
-        this.setState({ todoList: this.state.todoList.filter(td => td.id != todo.id) });
+        this.setState({ todoList: this.state.todoList.filter(td => td.id !== todo.id) });
         toast.success(todo.title + " is deleted!");
     }
 
@@ -33,7 +33,7 @@ class ListTodo extends React.Component {
 
         let { todoList, editTodo } = { ...this.state };
 
-        let index = todoList.findIndex(td => td.id == todo.id);
+        let index = todoList.findIndex(td => td.id === todo.id);
         todoList[index].title = editTodo.title;
         this.setState({ todoList: todoList, editTodo: {} });
         toast.success("Updated!");
