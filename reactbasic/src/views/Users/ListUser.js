@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Navigate, NavLink } from "react-router-dom";
+import { Navigate, NavLink, Outlet } from "react-router-dom";
 
 class ListUser extends React.Component {
     state = { users: [] };
@@ -14,6 +14,8 @@ class ListUser extends React.Component {
         return (
             <div>
                 List User
+                <Outlet />
+
                 <div className="userlist">
                     {users && users.length > 0 &&
                         this.state.users.map(
@@ -29,6 +31,7 @@ class ListUser extends React.Component {
                             }
                         )}
                 </div>
+
             </div>
         )
     }

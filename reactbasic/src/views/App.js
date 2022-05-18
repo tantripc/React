@@ -12,11 +12,12 @@ import {
   BrowserRouter,
   Routes,
   Route,
+  Outlet,
 } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import MyComponent from './Example/MyComponent';
 import ListUser from './Users/ListUser';
-import DetailUser from './Users/DetailUser';
+import DetailUserParam from './Users/DetailUserParam';
 
 const history = createBrowserHistory({ window });
 
@@ -32,9 +33,10 @@ function App() {
             <Route path="/todos" element={<ListTodo />} />
             <Route path="/about" element={<MyComponent />} />
             <Route path="/users" element={<ListUser baseUrl="/users" />} exact="true">
-              <Route path=':userId' element={<DetailUser />} />
+              <Route path=':userId' element={<DetailUserParam />} />
             </Route>
           </Routes>
+          <Outlet />
         </header>
       </div>
     </BrowserRouter>
