@@ -36,7 +36,6 @@ function App() {
               <Route path=':userId' element={<DetailUserParam />} />
             </Route>
           </Routes>
-          <Outlet />
         </header>
       </div>
     </BrowserRouter>
